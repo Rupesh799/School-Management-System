@@ -34,8 +34,8 @@ const data = [
 const Chart = () => {
   return (
     <div className="bg-white rounded-xl p-4 w-full h-full shadow-md hover:shadow-sm cursor-pointer">
-        <div className="flex items-center justify-between">
-            <h1 className="font-bold">Students</h1>
+        <div className="flex items-center justify-between ">
+            <h1 className="font-bold ">Students</h1>
             <BsThreeDots className="font-bold cursor-pointer hover:text-primary-light"/>
         </div>
         <div className=" relative flex justify-center items-center w-full h-[75%]">
