@@ -7,3 +7,47 @@
     border: none !important;
     font-family: "Inter", sans-serif !important;
 }
+
+.react-calendar__tile--active{
+    background-color: #98BDFF !important;
+    color: black !important;
+  
+}
+.rbc-btn-group:first-child{
+    display: none !important;
+}
+
+.rbc-toolbar-label{
+    text-align: right !important;
+    padding: 0 20px !important;
+}
+.rbc-btn-group:last-child{
+    font-size: 14px;
+    color: aliceblue;
+  
+}
+
+.rbc-btn-group:last-child button{
+    border: none;
+    background-color:  #91a4c5 !important;
+    font-weight: bold;
+    
+}
+
+.rbc-toolbar button.rbc-active{
+    background-color:  #98BDFF !important;
+    box-shadow: none;
+
+}
+
+.rbc-time-view{
+    border-color: #afc6ef;
+}
+.rbc-time-header{
+    display: none !important;
+}
+
+.rbc-timeslot-group{
+    background-color: #cde8e2 !important;
+}
+
