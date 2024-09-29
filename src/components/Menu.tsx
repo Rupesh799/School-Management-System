@@ -1,3 +1,4 @@
+import { role } from "@/lib/data";
 import Link from "next/link";
 import {
   BiBook,
@@ -12,7 +13,7 @@ import { BsPerson } from "react-icons/bs";
 import { CgEditBlackPoint, CgProfile, CgWorkAlt } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci";
 import { GiTeacher } from "react-icons/gi";
-import { MdAnnouncement, MdOutput, MdRoom } from "react-icons/md";
+import { MdAnnouncement, MdOutput, MdRoom, MdSubject } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
 
 const menuItems = [
@@ -41,6 +42,12 @@ const menuItems = [
         icon: BsPerson,
         label: "Parents",
         href: "/parents",
+        visible: ["admin", "teacher"],
+      },
+      {
+        icon:MdSubject,
+        label: "Subjects",
+        href: "/list/subjects",
         visible: ["admin", "teacher"],
       },
      
@@ -122,23 +129,28 @@ const menuItems = [
 
 const Menu = () => {
   return (
-    <div className="mt-4 text-sm ">
+    <div className="mt-2 text-sm ">
       {menuItems.map((i) => (
         <div key={i.title} className="flex flex-col gap-2">
           <span className="hidden lg:block font-light  text-gray-600">
             {i.title}
           </span>
-          {i.items.map((item) => (
-            <Link
-              href={item.href}
-              key={item.label}
-              className="flex items-center justify-center lg:justify-start gap-3 text-gray-500  hover:text-primary-light   py-[0.2rem] "
-            >
-              {/* <Image src={<item.icon/>} alt="navitems" height={20} width={20}/> */}
-              <item.icon size={20} />
-              <span className="hidden lg:block font-bold">{item.label}</span>
-            </Link>
-          ))}
+          {i.items.map((item) => {
+            if(item.visible.includes(role)){
+               return (
+                <Link
+                  href={item.href}
+                  key={item.label}
+                  className="flex items-center justify-center lg:justify-start gap-3 text-gray-500  hover:text-primary-light   py-[0.2rem] "
+                >
+                  {/* <Image src={<item.icon/>} alt="navitems" height={20} width={20}/> */}
+                  <item.icon size={20} />
+                  <span className="hidden lg:block font-bold">{item.label}</span>
+                </Link>
+              )
+            }
+          }
+          )}
         </div>
       ))}
     </div>
