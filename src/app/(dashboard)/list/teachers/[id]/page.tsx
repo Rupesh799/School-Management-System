@@ -32,7 +32,7 @@ const SingleTeacher = () => {
                                         <p className='text-xs text-gray-700'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, saepe.</p>
 
 
-                                        <div className='flex items-center justify-between gap-2  text-xs font-medium'>
+                                        <div className='flex items-center  gap-2  text-xs flex-wrap font-medium'>
                                             <div className='w-full md:1/3 lg:w-full 2xl:w-1/3 flex gap-2 items-center '>
                                             <MdBloodtype size={20} />
                                             <h1>O+</h1>

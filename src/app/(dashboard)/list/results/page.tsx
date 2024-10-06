@@ -1,3 +1,4 @@
+import FormModal from "@/components/FormModal";
 import ListTable from "@/components/ListTable";
 import Pagination from "@/components/Pagination";
 import SearchTable from "@/components/SearchTable";
@@ -83,12 +84,13 @@ const LessonListPage = () => {
 
       <td>
         <div className="flex items-center gap-2 py-3">
-          <button className="bg-primary-light h-7 w-7 rounded-full flex items-center justify-center ">
-            <MdOpenInNew/>
-          </button>
-          {role == "admin" &&( <button className="bg-color-3 h-7 w-7 rounded-full flex items-center justify-center text-white">
-            <FaTrash/>
-          </button>)}
+        {role == "admin" && (
+            <>
+          <FormModal table="results" type="update" data={items}/>
+
+            <FormModal table="results" type="delete" id={items.id} />
+            </>
+          )}
         </div>
       </td>
     </tr>
@@ -104,15 +106,15 @@ const LessonListPage = () => {
         <div className="flex flex-col md:flex-row gap-2 items-center w-full md:w-auto ">
           <SearchTable />
           <div className="flex items-center gap-2 self-end ">
-            <div className="bg-primary-light p-1 rounded-full cursor-pointer">
+          <div className="bg-primary-light h-8 w-8 rounded-full cursor-pointer flex items-center justify-center ">
               <BiFilter />
             </div>
-            <div className="bg-primary-light p-1 rounded-full cursor-pointer">
+            <div className="bg-primary-light h-8 w-8  rounded-full cursor-pointer flex items-center justify-center ">
               <HiSortAscending />
             </div>
-            {role == "admin" && <div className="bg-primary-light p-1 rounded-full cursor-pointer ">
-              <BiPlus />
-            </div>}
+            {role == "admin" && (
+              <FormModal table="results" type="create"/>
+            )}
           </div>
         </div>
       </div>

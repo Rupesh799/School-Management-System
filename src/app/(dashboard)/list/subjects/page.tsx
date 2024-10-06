@@ -1,7 +1,8 @@
+import FormModal from "@/components/FormModal";
 import ListTable from "@/components/ListTable";
 import Pagination from "@/components/Pagination";
 import SearchTable from "@/components/SearchTable";
-import { parentsData, role, studentsData, subjectsData} from "@/lib/data";
+import { parentsData, role, studentsData, subjectsData } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -15,7 +16,7 @@ import { MdOpenInNew } from "react-icons/md";
 type Subject = {
   id: number;
   name: string;
-  teachers:string[];
+  teachers: string[];
 };
 
 const columns = [
@@ -28,7 +29,6 @@ const columns = [
     accessor: "teachers",
     className: "hidden md:table-cell",
   },
- 
 
   {
     header: "Actions",
@@ -38,18 +38,21 @@ const columns = [
 
 const SubjectListPage = () => {
   const renderTableInfo = (items: Subject) => (
-    <tr key={items.id} className="border-b m-3 border-gray-200 even:bg-primary-light/10 hover:bg-primary/10 text-sm ">
-      
+    <tr
+      key={items.id}
+      className="border-b m-3 border-gray-200 even:bg-primary-light/10 hover:bg-primary/10 text-sm "
+    >
       <td className="">{items.name}</td>
       <td className="hidden md:table-cell">{items.teachers.join(",")}</td>
       <td>
         <div className="flex items-center gap-2 py-3">
-          <button className="bg-primary-light h-7 w-7 rounded-full flex items-center justify-center ">
-            <MdOpenInNew/>
-          </button>
-          {role == "admin" &&( <button className="bg-color-3 h-7 w-7 rounded-full flex items-center justify-center text-white">
-            <FaTrash/>
-          </button>)}
+        {role == "admin" && (
+            <>
+          <FormModal table="subject" type="update" data={items}/>
+
+            <FormModal table="subject" type="delete" id={items.id} />
+            </>
+          )}
         </div>
       </td>
     </tr>
@@ -65,20 +68,24 @@ const SubjectListPage = () => {
         <div className="flex flex-col md:flex-row gap-2 items-center w-full md:w-auto ">
           <SearchTable />
           <div className="flex items-center gap-2 self-end ">
-            <div className="bg-primary-light p-1 rounded-full cursor-pointer">
+            <div className="bg-primary-light h-8 w-8 rounded-full cursor-pointer flex items-center justify-center ">
               <BiFilter />
             </div>
-            <div className="bg-primary-light p-1 rounded-full cursor-pointer">
+            <div className="bg-primary-light h-8 w-8  rounded-full cursor-pointer flex items-center justify-center ">
               <HiSortAscending />
             </div>
-            {role == "admin" && <div className="bg-primary-light p-1 rounded-full cursor-pointer ">
-              <BiPlus />
-            </div>}
+            {role == "admin" && (
+              <FormModal table="subject" type="create"/>
+            )}
           </div>
         </div>
       </div>
       {/* list */}
-        <ListTable columns={columns} renderTableInfo={renderTableInfo} data={subjectsData}/>
+      <ListTable
+        columns={columns}
+        renderTableInfo={renderTableInfo}
+        data={subjectsData}
+      />
       {/* pagination */}
       <div>
         <Pagination />

@@ -1,7 +1,16 @@
+import FormModal from "@/components/FormModal";
 import ListTable from "@/components/ListTable";
 import Pagination from "@/components/Pagination";
 import SearchTable from "@/components/SearchTable";
-import { classesData, examsData, lessonsData, parentsData, role, studentsData, subjectsData} from "@/lib/data";
+import {
+  classesData,
+  examsData,
+  lessonsData,
+  parentsData,
+  role,
+  studentsData,
+  subjectsData,
+} from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -15,9 +24,9 @@ import { MdOpenInNew } from "react-icons/md";
 type Exam = {
   id: number;
   subject: string;
-  class:string;
-  teacher:string;
-  date:string;
+  class: string;
+  teacher: string;
+  date: string;
 };
 
 const columns = [
@@ -36,7 +45,7 @@ const columns = [
     className: "hidden md:table-cell",
   },
   {
-    header:"Exam Date",
+    header: "Exam Date",
     accessor: "date",
     className: "hidden md:table-cell",
   },
@@ -49,8 +58,10 @@ const columns = [
 
 const LessonListPage = () => {
   const renderTableInfo = (items: Exam) => (
-    <tr key={items.id} className="border-b m-3 border-gray-200 even:bg-primary-light/10 hover:bg-primary/10 text-sm ">
-      
+    <tr
+      key={items.id}
+      className="border-b m-3 border-gray-200 even:bg-primary-light/10 hover:bg-primary/10 text-sm "
+    >
       <td className="">{items.subject}</td>
       <td className="hidden md:table-cell">{items.class}</td>
       <td className="hidden md:table-cell">{items.teacher}</td>
@@ -58,12 +69,13 @@ const LessonListPage = () => {
 
       <td>
         <div className="flex items-center gap-2 py-3">
-          <button className="bg-primary-light h-7 w-7 rounded-full flex items-center justify-center ">
-            <MdOpenInNew/>
-          </button>
-          {role == "admin" &&( <button className="bg-color-3 h-7 w-7 rounded-full flex items-center justify-center text-white">
-            <FaTrash/>
-          </button>)}
+        {role == "admin" && (
+            <>
+          <FormModal table="exam" type="update" data={items}/>
+
+            <FormModal table="exam" type="delete" id={items.id} />
+            </>
+          )}
         </div>
       </td>
     </tr>
@@ -79,20 +91,22 @@ const LessonListPage = () => {
         <div className="flex flex-col md:flex-row gap-2 items-center w-full md:w-auto ">
           <SearchTable />
           <div className="flex items-center gap-2 self-end ">
-            <div className="bg-primary-light p-1 rounded-full cursor-pointer">
+            <div className="bg-primary-light h-8 w-8 rounded-full cursor-pointer flex items-center justify-center ">
               <BiFilter />
             </div>
-            <div className="bg-primary-light p-1 rounded-full cursor-pointer">
+            <div className="bg-primary-light h-8 w-8  rounded-full cursor-pointer flex items-center justify-center ">
               <HiSortAscending />
             </div>
-            {role == "admin" && <div className="bg-primary-light p-1 rounded-full cursor-pointer ">
-              <BiPlus />
-            </div>}
+            {role == "admin" && <FormModal table="exam" type="create" />}
           </div>
         </div>
       </div>
       {/* list */}
-        <ListTable columns={columns} renderTableInfo={renderTableInfo} data={examsData}/>
+      <ListTable
+        columns={columns}
+        renderTableInfo={renderTableInfo}
+        data={examsData}
+      />
       {/* pagination */}
       <div>
         <Pagination />
