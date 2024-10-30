@@ -140,7 +140,7 @@ const TeacherFrom = ({
             </p>
           )}
         </div>
-        
+          
         <div className="flex flex-col gap-3 w-full md:w-1/4 justify-center">
           <label className="text-xs text-gray-500 flex items-center gap-2 cursor-pointer" htmlFor="img">
             <FiUploadCloud size={30}/>
